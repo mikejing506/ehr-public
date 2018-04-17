@@ -171,7 +171,14 @@ class Index extends React.Component {
           <Typography variant="subheading" gutterBottom>
             Car Services
           </Typography>
-          <Link to="/preorder">
+          <Link to="/preorder/dh">
+            <div className={classes.items} >
+              <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
+                <strong>Driver</strong> for Hire
+            </Typography>
+            </div>
+          </Link>
+          <Link to="/preorder/dp">
             <div className={classes.items} >
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
               <strong>Driver</strong> Pickup

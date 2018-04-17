@@ -74,6 +74,7 @@ class PreOrderCC extends React.Component {
         left: false,
         from:"",
         to:"",
+        num:1,
         user:{}
     };
 
@@ -98,6 +99,12 @@ class PreOrderCC extends React.Component {
             this.props.history.push('/drive/'+res.body.id)
         })
     }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
 
     componentWillMount() {
         this.setState({
@@ -144,6 +151,26 @@ class PreOrderCC extends React.Component {
                                     style={{ float: 'right', width: '100%', right: 0 }}
                                     value={this.state.from}
                                     onChange={this._handleFrom}
+                                />
+                            </div>
+                        </ListItem>
+                    </Paper>
+                    <Paper elevation={5} style={{ marginBottom: 20 }}>
+                        <ListItem button>
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
+                                Children Number
+                            </Typography>
+                            <div style={{ float: 'right', width: '50%', right: 0 }}>
+                                <TextField
+                                    id="number"
+                                    required
+                                    value={this.state.num}
+                                    onChange={this.handleChange('num')}
+                                    type="number"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </div>
                         </ListItem>

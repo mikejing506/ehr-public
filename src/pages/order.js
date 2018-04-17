@@ -43,7 +43,6 @@ const styles = theme => ({
         marginBottom:15
     },
     continue:{
-        backgroundColor: '#2D9CDB',
         width:20,
         height:20,
         float:'left',
@@ -105,25 +104,25 @@ class Order extends React.Component {
                         <Link to={"/order_ditail/"+v.id}>
                             <Paper className={classes.papers} elevation={4}>
                                 <div style={{ float: 'right', marginTop: 11, }}>
-                                    <Typography component="h3" style={{ fontSize: 22, color: '#2D9CDB' }}>
-                                        {v.state == 0 ? "Ditail":v.cast}
+                                    <Typography component="h3" style={{ fontSize: 22, color: v.state == 0 ? '#2D9CDB' : '#75BA80' }}>
+                                        {v.state == 0 ? "Ditail":'$'+v.cast}
                                     </Typography>
-                                    <Typography component="h3" align='right' style={{ fontSize: 12, color: '#2D9CDB', }}>
+                                    <Typography component="h3" align='right' style={{ fontSize: 12, color: v.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                         {v.state == 0 ? "Process" : "Finished"}
                                      </Typography>
                                 </div>
-                                <Avatar className={classes.continue}>
+                                <Avatar className={classes.continue} style={{ backgroundColor: v.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                 </Avatar>
                                 <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
                                     {config.order[v.class]}
-                        </Typography>
+                                </Typography>
 
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                                     {Date(v.time).toString("YYYY-MM-DD")}
-                        </Typography>
+                                </Typography>
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                                     {v.to}
-                        </Typography>
+                                </Typography>
 
                             </Paper>
                         </Link >

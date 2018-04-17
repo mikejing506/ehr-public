@@ -31,7 +31,7 @@ render((
       <Route path='/reg_stp2' component={Reg_stp2} />
       <Route path='/drive/:id' component={Drive} />
       <Route path='/order' component={Order} />
-      <Route path='/preorder' component={PreOrder} />
+      <Route path='/preorder/:id' component={PreOrder} />
       <Route path='/preorder_cw' component={PreOrderCW} />
       <Route path='/preorder_gd' component={PreOrderGD} />
       <Route path='/preorder_fd' component={PreOrderFD} />

@@ -5,5 +5,6 @@ export const order = [
     'Grocery Delivery',
     'Food Delevery',
     'Child Care',
-    'Custom'
+    'Custom',
+    'Driver for hire'
 ]

@@ -97,14 +97,14 @@ class OrderDitail extends React.Component {
                 <div className={classes.panels}>
                     <Paper className={classes.papers} elevation={4}>
                         <div style={{ float: 'right', marginTop: 11, }}>
-                            <Typography component="h3" style={{ fontSize: 22, color: '#2D9CDB' }}>
-                                {this.state.data.state == 0 ? "Ditail" : ""}
+                            <Typography component="h3" style={{ fontSize: 22, color: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
+                                {this.state.data.state == 0 ? "Ditail" : '$'+this.state.data.cast}
                         </Typography>
-                            <Typography component="h3" align='right' style={{ fontSize: 12, color: '#2D9CDB', }}>
+                            <Typography component="h3" align='right' style={{ fontSize: 12, color: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                 {this.state.data.state == 0 ? "Process" : "Finished"}
                         </Typography>
                         </div>
-                        <Avatar className={classes.continue}>
+                        <Avatar className={classes.continue} style={{ backgroundColor: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                         </Avatar>
                         <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
                             {config.order[this.state.data.class]}

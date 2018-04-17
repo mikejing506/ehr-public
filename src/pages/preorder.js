@@ -74,6 +74,7 @@ class PreOrder extends React.Component {
         left: false,
         from:"",
         to:"",
+        num:1,
         user:{}
     };
 
@@ -92,12 +93,18 @@ class PreOrder extends React.Component {
     _handleLogin = () =>{
         request
         .post(config.server+"/order/new")
-        .send({uid:this.state.user.ID,from:this.state.from,to:this.state.to,class:0})
+        .send({uid:this.state.user.ID,from:this.state.from,to:this.state.to,class:this.props.match.id==='dh'?0:6,ex:this.state.num})
         .end((err,res)=>{
             if (err) throw err;
             this.props.history.push('/drive/'+res.body.id)
         })
     }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
 
     componentWillMount() {
         this.setState({
@@ -150,16 +157,38 @@ class PreOrder extends React.Component {
                         <Divider />
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                                To
+                                {this.props.match.params.id === 'dh'? "Time":"To"}
                             </Typography>
                             <div style={{ float: 'right', width: '100%', right: 0 }}>
                                 <TextField
                                     required
                                     id="required"
+                                    type={this.props.match.params.id === 'dh' ? "time" : "text"}
                                     className={classes.textField}
                                     style={{ float: 'right', width: '100%', right: 0 }}
                                     value={this.state.to}
                                     onChange={this._handleTo}
+                                />
+                            </div>
+                        </ListItem>
+                    </Paper>
+
+                    <Paper elevation={5} style={{ marginBottom: 20 }}>
+                        <ListItem button>
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
+                                Passenger Number
+                            </Typography>
+                            <div style={{ float: 'right', width: '50%', right: 0 }}>
+                                <TextField
+                                    id="number"
+                                    required
+                                    value={this.state.num}
+                                    onChange={this.handleChange('num')}
+                                    type="number"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                 />
                             </div>
                         </ListItem>

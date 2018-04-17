@@ -9,6 +9,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField'
+import MenuItem from 'material-ui/Menu/MenuItem';
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import {
@@ -61,6 +62,17 @@ const styles = theme => ({
         borderRadius: '1.5rem',
     },
 });
+
+const currencies = [
+    {
+        value: 'SUV',
+        label: 'SUV',
+    },
+    {
+        value: 'Sedan',
+        label: 'Sedan',
+    },
+];
 
 
 class PreOrderCW extends React.Component {
@@ -155,13 +167,20 @@ class PreOrderCW extends React.Component {
                             </Typography>
                             <div style={{ float: 'right', width: '100%', right: 0 }}>
                                 <TextField
+                                    select
                                     required
                                     id="required"
                                     className={classes.textField}
                                     style={{ float: 'right', width: '100%', right: 0 }}
                                     value={this.state.to}
                                     onChange={this._handleTo}
-                                />
+                                >
+                                    {currencies.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
                             </div>
                         </ListItem>
                     </Paper>
