@@ -18,6 +18,8 @@ import First from './pages/first'
 import AccInfo from './pages/ainfo'
 import About from './pages/about'
 import RunnerIndex from './pages/runner_main'
+import RunnerNew from './pages/runner_new'
+import RunnerOrder from './pages/runner_order'
 
 var f = localStorage.getItem('f')
 
@@ -41,6 +43,10 @@ render((
       <Route path='/accinfo' component={AccInfo} />
       <Route path='/about' component={About} />
       <Route path='/runner' component={RunnerIndex} />
+      <Route path='/runner_new/:id' component={RunnerNew} />
+      <Route path='/runner_ditail/:id' component={RunnerIndex} />
+      <Route path='/runner_order' component={RunnerOrder} />
+      <Route path='/runner_order_ditail/:id' component={RunnerIndex} />
     </Switch>
   </HashRouter>
   ), document.querySelector('#root'))

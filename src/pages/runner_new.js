@@ -13,8 +13,7 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import {
     ArrowBack,
-    Close,
-    Call
+    Close
 } from 'material-ui-icons';
 import Dialog, {
     DialogActions,
@@ -112,13 +111,9 @@ const styles = theme => ({
     }
 });
 
-const Index = (props) => (
-    <Paper className={classes.papers} elevation={4}>
-        
-    </Paper>
-)
+var map, marker;
 
-class RunnerIndex extends React.Component {
+class RunnerNew extends React.Component {
     state = {
         open: false,
         left: false,
@@ -132,39 +127,41 @@ class RunnerIndex extends React.Component {
     };
 
     tick() {
-        console.log('tick+1')
-        request.post(config.server + '/runner').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
-            if (err) throw err
-            this.setState({ data: res.body.id[0] })
-            console.log(res.body.id[0])
-        });
+        // console.log('tick+1')
     }
 
     componentDidMount(){
-        this.interval = setInterval(() => this.tick(), 10000);
-        request.post(config.server + '/runner').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+        this.interval = setInterval(() => this.tick(), 1000);
+        request.post(config.server + '/order/maps').send({ id: this.props.match.params.id }).end((err, res) => {
             if (err) throw err
             this.setState({ data: res.body.id[0] })
-            console.log(res.body.id[0])
-        });
-        Date.prototype.Format = function (fmt) { //author: meizz 
-            var o = {
-                "M+": this.getMonth() + 1, //月份 
-                "d+": this.getDate(), //日 
-                "h+": this.getHours(), //小时 
-                "m+": this.getMinutes(), //分 
-                "s+": this.getSeconds(), //秒 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                "S": this.getMilliseconds() //毫秒 
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
-        var time1 = new Date().Format("yyyy.MM.dd");
-        this.setState({
-            time:time1
+            if (res.body.id[0].state) {
+                request.post(config.server + '/order/getrunner').send({ id: res.body.id[0].rid }).end((err, res) => {
+                    if (err) throw err
+                    this.setState({ runner: res.body.id[0] })
+                })
+            } else {
+                console.log('state b')
+            }
+            console.log(res.body.id[0].from)
+            request.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(res.body.id[0].from) + '&key=AIzaSyDw-HZToDeHqOdXOBgBz6YK78jquB_55gA').end((err, res) => {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 19,
+                    center: res.body.status == "ZERO_RESULTS" ? this.state.uluru : res.body.results[0].geometry.location,
+                    mapTypeId: 'roadmap',
+                    zoomControl: false,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    fullscreenControl: false,
+                });
+
+                marker = new google.maps.Marker({
+                    position: res.body.status == "ZERO_RESULTS" ? this.state.uluru : res.body.results[0].geometry.location,
+                    draggable: true,
+                    map: map
+                });
+            })
+            this.interval = setInterval(() => this.tick(), 10000);
         })
     }
 
@@ -172,6 +169,11 @@ class RunnerIndex extends React.Component {
         this.setState({
             user: JSON.parse(localStorage.getItem('userdata'))
         })
+    }
+
+    componentWillUnmount() {
+        map, marker = null;
+        clearInterval(this.interval);
     }
 
     handleChange = (event, value) => {
@@ -197,18 +199,13 @@ class RunnerIndex extends React.Component {
                             <Typography
                                 color="inherit"
                                 className={classes.title} >
-                                Ready to Go?
+                                New order coming!
                             </Typography>
                     </Toolbar>
                 </AppBar>
 
                 <div className={classes.body}>
-                    <Paper className={classes.papers} elevation={4}>
-                        <Typography component="h3" style={{ fontSize: 15, color: '#AAAAAA', textAlign: 'center' }} onClick={(e) => { console.log(this.state)}}>
-                            {this.state.time+'(Today)'}
-                        </Typography>
-                    </Paper>
-                    <div className={classes.items}>
+                    <div id="map" style={{ height: '100%', width: '100%' }} >
                     </div>
                     {this.state.data === undefined ? '':(
                         <Link to={'/runner_ditail/'+this.state.data.id}>
@@ -217,9 +214,10 @@ class RunnerIndex extends React.Component {
                                 </Avatar>
                                 <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
                                     On Process Order
-                                </Typography>
+                            </Typography>
+
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                                    <strong style={{ fontSize: 16, color: '#000' ,marginRight: 7}}>{this.state.data.name}</strong> {config.order[this.state.data.class]}
+                                    {Date(this.state.data.time).toString("YYYY-MM-DD")}
                                 </Typography>
                                 <Typography component="p" style={{ fontSize: 15, color: '#888888', marginLeft: 7 }}>
                                     {this.state.f[this.state.data.class]}: {this.state.data.from}
@@ -234,13 +232,6 @@ class RunnerIndex extends React.Component {
                         </Link>
                     )}
                 </div>
-                {this.state.data === undefined ? '':(
-                    <a href={'tel:'+this.state.data.phonenumber}>
-                        <Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', position:'fixed', bottom:80,right:20 }} >
-                            <Call />
-                        </Button>
-                    </a>
-                )}
                 <BottomNavigation
                     value={value}
                     onChange={this.handleChange}
@@ -248,7 +239,7 @@ class RunnerIndex extends React.Component {
                     style={{width:'100%',position:'fixed',bottom:0}}
                 >
                     <BottomNavigationAction label="Runner" />
-                    <BottomNavigationAction label="Order" onClick={(e)=>{this.props.history.push('/runner_order')}}/>
+                    <BottomNavigationAction label="Order" />
                     <BottomNavigationAction label="Me" />
                 </BottomNavigation>
             </div>
@@ -256,8 +247,8 @@ class RunnerIndex extends React.Component {
     }
 }
 
-RunnerIndex.propTypes = {
+RunnerNew.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(RunnerIndex));
+export default withRoot(withStyles(styles)(RunnerNew));
