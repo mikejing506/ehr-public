@@ -1,4 +1,4 @@
-export const server = 'http://treediagram.net:9000'
+export const server = 'http://localhost:3000'
 export const order = [
     'Driver Picking',
     'Car Wash',

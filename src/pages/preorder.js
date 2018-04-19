@@ -56,7 +56,7 @@ const styles = theme => ({
         marginTop: 2
     },
     button: {
-        marginTop: 30,
+        marginTop: 10,
         width: '100%',
         borderRadius: '1.5rem',
     },
@@ -93,7 +93,7 @@ class PreOrder extends React.Component {
     _handleLogin = () =>{
         request
         .post(config.server+"/order/new")
-        .send({uid:this.state.user.ID,from:this.state.from,to:this.state.to,class:this.props.match.id==='dh'?0:6,ex:this.state.num})
+            .send({ uid: this.state.user.ID, from: this.state.from, to: this.state.to, class: this.props.match.params.id === 'dh' ? (6) : (0),ex:this.state.num})
         .end((err,res)=>{
             if (err) throw err;
             this.props.history.push('/drive/'+res.body.id)
@@ -157,9 +157,9 @@ class PreOrder extends React.Component {
                         <Divider />
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                                {this.props.match.params.id === 'dh'? "Time":"To"}
+                                {this.props.match.params.id === 'dh'? "Start Time":"To"}
                             </Typography>
-                            <div style={{ float: 'right', width: '100%', right: 0 }}>
+                            <div style={{ float: 'right', width: this.props.match.params.id === 'dh' ? "72%" : "100%", right: 0 }}>
                                 <TextField
                                     required
                                     id="required"
@@ -192,6 +192,14 @@ class PreOrder extends React.Component {
                                 />
                             </div>
                         </ListItem>
+                    </Paper>
+                    <Paper elevation={5} style={{ marginBottom: 20 }}>
+                        <Typography variant="title" component="h3" style={{ paddingTop: 15, textAlign: 'center', color:'#2F80ED' }} >
+                            {this.props.match.params.id === 'dh'? "$40 per hour":'$'+this.state.num*15}
+                        </Typography>
+                        <Typography variant="subheading" component="h3" style={{ paddingBottom: 15, textAlign: 'center', color: '#AAAAAA' }} >
+                            Estimated price
+                        </Typography>
                     </Paper>
                     <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
                         Okey

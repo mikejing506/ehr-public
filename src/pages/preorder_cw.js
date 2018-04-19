@@ -57,7 +57,7 @@ const styles = theme => ({
         marginTop: 2
     },
     button: {
-        marginTop: 30,
+        marginTop: 15,
         width: '100%',
         borderRadius: '1.5rem',
     },
@@ -184,6 +184,14 @@ class PreOrderCW extends React.Component {
                             </div>
                         </ListItem>
                     </Paper>
+                    {this.state.to ? <Paper elevation={5} style={{ marginBottom: 20 }}>
+                        <Typography variant="title" component="h3" style={{ paddingTop: 15, textAlign: 'center', color: '#2F80ED' }} >
+                            {this.state.to === 'SUV' ? '$75' :'$65'}
+                        </Typography>
+                        <Typography variant="subheading" component="h3" style={{ paddingBottom: 15, textAlign: 'center', color: '#AAAAAA' }} >
+                            Estimated price
+                        </Typography>
+                    </Paper>:''}
                     <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
                         Okey
                     </Button>
