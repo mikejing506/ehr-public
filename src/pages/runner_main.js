@@ -133,9 +133,9 @@ class RunnerIndex extends React.Component {
 
     tick() {
         console.log('tick+1')
-        request.post(config.server + '/runner').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+        request.post(config.server + '/runner/new').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
             if (err) throw err
-            this.setState({ data: res.body.id[0] })
+            // this.setState({ data: res.body.id[0] })
             console.log(res.body.id[0])
         });
     }
@@ -166,6 +166,10 @@ class RunnerIndex extends React.Component {
         this.setState({
             time:time1
         })
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     componentWillMount() {
@@ -249,7 +253,7 @@ class RunnerIndex extends React.Component {
                 >
                     <BottomNavigationAction label="Runner" />
                     <BottomNavigationAction label="Order" onClick={(e)=>{this.props.history.push('/runner_order')}}/>
-                    <BottomNavigationAction label="Me" />
+                    <BottomNavigationAction label="Me" onClick={(e) => { this.props.history.push('/') }}/>
                 </BottomNavigation>
             </div>
         );

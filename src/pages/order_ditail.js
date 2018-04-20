@@ -64,6 +64,21 @@ class OrderDitail extends React.Component {
     };
 
     componentWillMount() {
+        Date.prototype.Format = function (fmt) { //author: meizz 
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "h+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
         console.log(JSON.parse(localStorage.getItem('userdata')).ID)
         request.post(config.server + '/order/ditail').send({ id: this.props.match.params.id }).end((err, res) => {
             if (err) throw err;
@@ -84,11 +99,9 @@ class OrderDitail extends React.Component {
                     className={classes.appbar}
                 >
                     <Toolbar>
-                        <Link to="/order" style={{ color:"#FFF"}}>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.props.history.goBack() }}>
                             <ArrowBack />
                         </IconButton>
-                        </Link>
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             Order Ditail
                         </Typography>
@@ -111,7 +124,7 @@ class OrderDitail extends React.Component {
                         </Typography>
 
                         <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                            {Date(this.state.data.time).toString("YYYY-MM-DD")}
+                            {new Date(parseInt(this.state.data.time)).Format("yyyy-MM-dd hh:mm")}
                         </Typography>
                         <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                             {this.state.data.from}

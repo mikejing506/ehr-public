@@ -131,7 +131,22 @@ class RunnerNew extends React.Component {
     }
 
     componentDidMount(){
-        this.interval = setInterval(() => this.tick(), 1000);
+        Date.prototype.Format = function (fmt) { //author: meizz 
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "h+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        // this.interval = setInterval(() => this.tick(), 1000);
         request.post(config.server + '/order/maps').send({ id: this.props.match.params.id }).end((err, res) => {
             if (err) throw err
             this.setState({ data: res.body.id[0] })
@@ -205,7 +220,7 @@ class RunnerNew extends React.Component {
                 </AppBar>
 
                 <div className={classes.body}>
-                    <div id="map" style={{ height: '100%', width: '100%' }} >
+                    <div id="map" style={{ height: 200, width: '100%' }} >
                     </div>
                     {this.state.data === undefined ? '':(
                         <Link to={'/runner_ditail/'+this.state.data.id}>
@@ -217,7 +232,7 @@ class RunnerNew extends React.Component {
                             </Typography>
 
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                                    {Date(this.state.data.time).toString("YYYY-MM-DD")}
+                                    {new Date(parseInt(this.state.data.time)).Format("yyyy.MM.dd - hh:mm")}
                                 </Typography>
                                 <Typography component="p" style={{ fontSize: 15, color: '#888888', marginLeft: 7 }}>
                                     {this.state.f[this.state.data.class]}: {this.state.data.from}
