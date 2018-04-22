@@ -11,10 +11,6 @@ import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
-import {
-    ArrowBack,
-    Close
-} from 'material-ui-icons';
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -26,7 +22,11 @@ import Divider from 'material-ui/Divider';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Slide from 'material-ui/transitions/Slide';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation'
-
+import {
+    ArrowBack,
+    Close,
+    Check
+} from 'material-ui-icons';
 
 const request = require('superagent');
 const config = require('../config')
@@ -131,21 +131,7 @@ class RunnerNew extends React.Component {
     }
 
     componentDidMount(){
-        Date.prototype.Format = function (fmt) { //author: meizz 
-            var o = {
-                "M+": this.getMonth() + 1, //月份 
-                "d+": this.getDate(), //日 
-                "h+": this.getHours(), //小时 
-                "m+": this.getMinutes(), //分 
-                "s+": this.getSeconds(), //秒 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                "S": this.getMilliseconds() //毫秒 
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
+        
         // this.interval = setInterval(() => this.tick(), 1000);
         request.post(config.server + '/order/maps').send({ id: this.props.match.params.id }).end((err, res) => {
             if (err) throw err
@@ -223,7 +209,6 @@ class RunnerNew extends React.Component {
                     <div id="map" style={{ height: 200, width: '100%' }} >
                     </div>
                     {this.state.data === undefined ? '':(
-                        <Link to={'/runner_ditail/'+this.state.data.id}>
                             <Paper className={classes.papers} elevation={4}>
                                 <Avatar className={classes.continue} style={{ backgroundColor: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                 </Avatar>
@@ -244,18 +229,25 @@ class RunnerNew extends React.Component {
                                     ${this.state.data.cast}
                                 </Typography>
                             </Paper>
-                        </Link>
                     )}
                 </div>
+                <Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', position: 'fixed', bottom: 80, right: 20 }} onClick={()=>{
+                    window.list.push(parseInt(this.props.match.params.id))
+                    this.props.history.goBack()}}>
+                    <Close />
+                </Button>
+                <Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', position: 'fixed', bottom: 80, left: 20 }} >
+                    <Check />
+                </Button>
                 <BottomNavigation
                     value={value}
                     onChange={this.handleChange}
                     showLabels
                     style={{width:'100%',position:'fixed',bottom:0}}
                 >
-                    <BottomNavigationAction label="Runner" />
-                    <BottomNavigationAction label="Order" />
-                    <BottomNavigationAction label="Me" />
+                    <BottomNavigationAction label="Runner" onClick={(e)=>{this.props.history.push('/runner')}}/>
+                    <BottomNavigationAction label="Order" onClick={(e)=>{this.props.history.push('/runner_order')}}/>
+                    <BottomNavigationAction label="Me" onClick={(e) => { this.props.history.push('/') }}/>
                 </BottomNavigation>
             </div>
         );

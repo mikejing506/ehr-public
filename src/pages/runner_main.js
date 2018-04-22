@@ -133,35 +133,30 @@ class RunnerIndex extends React.Component {
 
     tick() {
         console.log('tick+1')
-        request.post(config.server + '/runner/new').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
-            if (err) throw err
-            // this.setState({ data: res.body.id[0] })
-            console.log(res.body.id[0])
-        });
+        if (!this.state.data) {
+            request.post(config.server + '/runner/new').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+                if (err) throw err
+                // this.setState({ data: res.body.id[0] })
+                // console.log(res.body.id.length)
+                window.res = res.body.id
+                let re = res.body.id
+                for (let i = 0; i < re.length; i++) {
+                    window.list.indexOf(re[i].id) === -1 ? null : re.splice(window.list.indexOf(re[i].id), 1)
+                }
+                let oid = Math.floor(Math.random() * re.length)
+                // console.log(window.list)
+                this.props.history.push('/runner_new/' + re[oid].id)
+            });
+        }
     }
 
     componentDidMount(){
-        this.interval = setInterval(() => this.tick(), 10000);
+        this.interval = setInterval(() => this.tick(), 1000);
         request.post(config.server + '/runner').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
             if (err) throw err
             this.setState({ data: res.body.id[0] })
             console.log(res.body.id[0])
         });
-        Date.prototype.Format = function (fmt) { //author: meizz 
-            var o = {
-                "M+": this.getMonth() + 1, //月份 
-                "d+": this.getDate(), //日 
-                "h+": this.getHours(), //小时 
-                "m+": this.getMinutes(), //分 
-                "s+": this.getSeconds(), //秒 
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-                "S": this.getMilliseconds() //毫秒 
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
         var time1 = new Date().Format("yyyy.MM.dd");
         this.setState({
             time:time1

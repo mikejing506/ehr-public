@@ -60,7 +60,9 @@ class OrderDitail extends React.Component {
     state = {
         open: false,
         left: false,
-        data:{}
+        data:{},
+        f: ['From', 'Address', 'Address', 'Address', 'Address', 'Address', 'From'],
+        t: ['To', 'Classification', '', '', '', '', 'Start Time'] 
     };
 
     componentWillMount() {
@@ -126,15 +128,11 @@ class OrderDitail extends React.Component {
                         <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                             {new Date(parseInt(this.state.data.time)).Format("yyyy-MM-dd hh:mm")}
                         </Typography>
-                        <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                            {this.state.data.from}
-                        </Typography>
-                        <div id="map" style={{height:150}}></div>
                         <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 15 }}>
-                            To
+                            {this.state.f[this.state.data.class]}:  {this.state.data.from}
                         </Typography>
-                        <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 25, width:200 }}>
-                            {this.state.data.to}
+                        <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 15 }}>
+                            {this.state.t[this.state.data.class]}:  {this.state.data.to}
                         </Typography>
                     </Paper>
                     
