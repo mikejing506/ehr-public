@@ -113,6 +113,10 @@ const styles = theme => ({
 
 var map, marker;
 
+function Transition(props) {
+    return <Slide direction="up" {...props} />;
+}
+
 class RunnerNew extends React.Component {
     state = {
         open: false,
@@ -181,6 +185,23 @@ class RunnerNew extends React.Component {
         this.setState({ value });
     };
 
+    handleGet = () =>{
+        request.post(config.server + '/runner/getorder').send({ id: this.props.match.params.id, rid: JSON.parse(localStorage.getItem('userdata')).ID }).end((err,res)=>{
+            if (err) throw err
+            if (res.body.data === false){
+                this.setState({ open: true });
+            }
+        })
+    }
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     render() {
         const { classes } = this.props;
         const { value } = this.state;
@@ -236,9 +257,26 @@ class RunnerNew extends React.Component {
                     this.props.history.goBack()}}>
                     <Close />
                 </Button>
-                <Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', position: 'fixed', bottom: 80, left: 20 }} >
+                <Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', position: 'fixed', bottom: 80, left: 20 }} onClick={this.handleGet}>
                     <Check />
                 </Button>
+                <Dialog
+                    open={this.state.open}
+                    transition={Transition}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle id="alert-dialog-slide-title">
+                        This order was accepted by others
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={()=>{this.props.history.goBack()}} color="primary">
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 <BottomNavigation
                     value={value}
                     onChange={this.handleChange}

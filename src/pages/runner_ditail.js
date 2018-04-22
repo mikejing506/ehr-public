@@ -96,7 +96,14 @@ class RunnerOrderDitail extends React.Component {
                 data: res.body.id[0]
             })
         })
-        
+    }
+
+    handleComp = () => {
+        request.post(config.server + '/runner/complish').send({ id: this.props.match.params.id }).end((err, res) => {
+            if (err) throw err;
+            console.log(res.body)
+            this.props.history.push('/runner')
+        })
     }
 
     handleCancel = () => {
@@ -143,7 +150,7 @@ class RunnerOrderDitail extends React.Component {
                                 {'$' + this.state.data.cast}
                             </Typography>
                         </div>
-                        <Button variant="raised" color="primary" className={classes.button} style={{ background: '#6FCF97', width:'40%', marginLeft: 15 }} onClick={this._handleReg}>
+                        <Button variant="raised" color="primary" className={classes.button} style={{ background: '#6FCF97', width: '40%', marginLeft: 15 }} onClick={this.handleComp}>
                             Complish
                         </Button>
                     </Paper>
