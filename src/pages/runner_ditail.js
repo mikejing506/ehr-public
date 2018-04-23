@@ -84,7 +84,7 @@ class RunnerOrderDitail extends React.Component {
         data:{},
         value: 0,
         f: ['From', 'Address', 'Address', 'Address', 'Address', 'Address', 'From'],
-        t: ['To', 'Classification', '', '', '', '', 'Start Time'] 
+        t: ['To', 'Classification', 'List', 'List', 'Note', 'Note', 'Start Time'] 
     };
 
     componentWillMount() {
@@ -99,11 +99,24 @@ class RunnerOrderDitail extends React.Component {
     }
 
     handleComp = () => {
-        request.post(config.server + '/runner/complish').send({ id: this.props.match.params.id }).end((err, res) => {
-            if (err) throw err;
-            console.log(res.body)
-            this.props.history.push('/runner')
-        })
+        if (this.state.data.cast === 0) {
+            console.log(1)
+            let cast = prompt("Please Input Cast", "0")
+            if (cast != null && cast != "") {
+                request.post(config.server + '/runner/complish').send({ id: this.props.match.params.id,cast:cast }).end((err, res) => {
+                    if (err) throw err;
+                    console.log(res.body)
+                    this.props.history.push('/runner')
+                })
+            }
+        } else {
+            console.log(2)
+            request.post(config.server + '/runner/complish').send({ id: this.props.match.params.id }).end((err, res) => {
+                if (err) throw err;
+                console.log(res.body)
+                this.props.history.push('/runner')
+            })
+        }
     }
 
     handleCancel = () => {

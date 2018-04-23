@@ -10,6 +10,9 @@ import Drawer from 'material-ui/Drawer';
 import Avatar from 'material-ui/Avatar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
+const request = require('superagent');
+const config = require('../config')
+
 import fs from 'fs';
 
 import img1 from '../imgs/1.png'
@@ -85,12 +88,20 @@ class Index extends React.Component {
     open: false,
     left: false,
     login: false,
+    runner:false,
     user:{}
   };
 
   componentWillMount() {
     this.setState({
       user: JSON.parse(localStorage.getItem('userdata'))
+    })
+    request.post(config.server + '/users/update').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+      if (err) throw err;
+      // console.log(res)
+      this.setState({
+        runner:res.body.id[0].runner
+      })
     })
   }
 
@@ -136,9 +147,9 @@ class Index extends React.Component {
           <ListItem button >
             <ListItemText primary="Setting" align='center'/>
           </ListItem>
-          <Link to='/runner'><ListItem button >
+          {this.state.runner ? <Link to='/runner'><ListItem button >
             <ListItemText primary="Runner" align='center' />
-          </ListItem></Link>
+          </ListItem></Link> : ''}
           <Link to="/about"><ListItem button >
             <ListItemText primary="About" align='center'/>
           </ListItem></Link>

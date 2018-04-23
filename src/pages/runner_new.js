@@ -127,7 +127,7 @@ class RunnerNew extends React.Component {
         data:{},
         time:'',
         f: ['From', 'Address', 'Address', 'Address', 'Address', 'Address', 'From'],
-        t: ['To', 'Classification', '', '', '', '', 'Start Time'] 
+        t: ['To', 'Classification', 'List', 'List', 'Note', 'Note', 'Start Time'] 
     };
 
     tick() {
@@ -190,6 +190,8 @@ class RunnerNew extends React.Component {
             if (err) throw err
             if (res.body.data === false){
                 this.setState({ open: true });
+            }else{
+                this.props.history.push('/runner')
             }
         })
     }
