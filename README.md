@@ -1,12 +1,12 @@
-# Parcel example
+# ehr client html5 code
 
 ## How to use
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
+Download the example [or clone the repo](https://github.com/blackcirno/ehr.git):
 
 ```bash
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/v1-beta | tar -xz --strip=2  material-ui-1-beta/examples/parcel
-cd parcel
+git clone https://github.com/blackcirno/ehr.git
+cd ehr
 ```
 
 Install it and run:
@@ -15,7 +15,3 @@ Install it and run:
 npm install
 npm run start
 ```
-
-## The idea behind the example
-
-[Parcel](https://github.com/parcel-bundler/parcel) is a Blazing fast, zero configuration web application bundler.
