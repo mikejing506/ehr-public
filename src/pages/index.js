@@ -51,7 +51,8 @@ const styles = theme => ({
     marginBottom: '0.8rem',
     height: '7rem',
     width: 'auto',
-    background : "#000"
+    background : "#000",
+    backgroundRepeat:'no-repeat'
   },
   items_text:{
     fontSize: '1.4rem',
@@ -183,20 +184,20 @@ class Index extends React.Component {
             Car Services
           </Typography>
           <Link to="/preorder/dh">
-            <div className={classes.items} >
+            <div className={classes.items} style={{ background: `url(${img1})`, backgroundSize:'cover' }}>
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
                 <strong>Driver</strong> for Hire
             </Typography>
             </div>
           </Link>
           <Link to="/preorder/dp">
-            <div className={classes.items} >
+            <div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
               <strong>Driver</strong> Pickup
             </Typography>
           </div>
           </Link>
-            <Link to='/preorder_cw'><div className={classes.items}>
+          <Link to='/preorder_cw'><div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
                 <strong>Car</strong> Wash
             </Typography>

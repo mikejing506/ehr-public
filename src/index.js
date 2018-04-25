@@ -21,6 +21,7 @@ import RunnerIndex from './pages/runner_main'
 import RunnerNew from './pages/runner_new'
 import RunnerOrder from './pages/runner_order'
 import RunnerOrderDitail from './pages/runner_ditail'
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 var f = localStorage.getItem('f')
 
@@ -51,6 +52,8 @@ Array.prototype.remove = function (val) {
 
 render((
   <HashRouter>
+    <TransitionGroup>
+      <CSSTransition classNames="fade" timeout={300}>
     <Switch>
       <Route exact path='/' component={f ? Index : First} />
       <Route path='/index' component={Index} />
@@ -73,5 +76,7 @@ render((
       <Route path='/runner_order' component={RunnerOrder} />
       <Route path='/runner_ditail/:id' component={RunnerOrderDitail} />
     </Switch>
+    </CSSTransition>
+    </TransitionGroup>
   </HashRouter>
   ), document.querySelector('#root'))

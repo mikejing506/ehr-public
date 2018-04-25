@@ -13,7 +13,8 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import {
     ArrowBack,
-    Close
+    Close,
+    Call
 } from 'material-ui-icons';
 import Dialog, {
     DialogActions,
@@ -151,47 +152,55 @@ class Driver extends React.Component {
                     className={classes.appbar}
                 >
                     <Toolbar>
-                        <IconButton onClick={this.handleClickOpen} style={{ color: "#FFF" }} className={classes.menuButton} color="inherit" aria-label="Menu">
-                            <Close />
+                        <IconButton onClick={(e)=>{this.props.history.goBack()}} style={{ color: "#FFF" }} className={classes.menuButton} color="inherit" aria-label="Menu">
+                            <ArrowBack />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             Order Ditail
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Paper elevation={5} style={{ marginBottom: 20, position: 'fixed', bottom: 20, left: '5%',width:'90%',zIndex:99}}>
-                    <ListItem button>
-                        <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
-                            {this.state.f[this.state.data.class]}
-                        </Typography>
-                        <div style={{ float: 'right', width: '100%', right: 0 }}>
-                            <Typography variant="subheading" align='right'  component="h3" style={{ float: 'right', width: '100%', right: 0 }}>
-                                {this.state.data.from}
+                <div style={{ marginBottom: 20, position: 'fixed', bottom: 20, left: '5%', width: '90%', zIndex: 99 }}>
+                    <Paper elevation={5} >
+                        <ListItem button>
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                {this.state.f[this.state.data.class]}
                             </Typography>
-                        </div>
-                    </ListItem>
-                    <Divider />
-                    {this.state.t[this.state.data.class] !== '' ? <ListItem button>
-                        <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                            {this.state.t[this.state.data.class]}
-                        </Typography>
-                        <div style={{ float: 'right', width: '75%', right: 0 }}>
-                            <Typography variant="subheading" align='right' component="h3" style={{ float: 'right', width: '100%', right: 0 }}>
-                                {this.state.data.to}
+                            <div style={{ float: 'right', width: '100%', right: 0 }}>
+                                <Typography variant="subheading" align='right' component="h3" style={{ float: 'right', width: '100%', right: 0 }}>
+                                    {this.state.data.from}
+                                </Typography>
+                            </div>
+                        </ListItem>
+                        <Divider />
+                        {this.state.t[this.state.data.class] !== '' ? <ListItem button>
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
+                                {this.state.t[this.state.data.class]}
                             </Typography>
-                        </div>
-                    </ListItem>:''}
-                    <Divider />
-                    <a href={this.state.data.state ? 'tel:' + this.state.runner.phonenumber : 'javascript:;'}>
-                    <ListItem button>
-                        {this.state.data.state ? <Avatar alt="Remy Sharp" src={this.state.runner.avatar} style={{ float: 'left', marginRight: 15 }} /> : ''}
-                        <Typography variant="subheading" align='center' component="h3" style={{ marginRight: 10 }} >
-                            {this.state.data.state ? <Typography component="p" style={{ fontSize: 20}}>{this.state.runner.name}</Typography>:''}
-                            {this.state.data.state ? <Typography component="p" style={{ fontSize: 14, color: '#888888', marginLeft: 7 }}>{this.state.runner.phonenumber}</Typography>:'Waiting Runner'}
-                        </Typography>
-                    </ListItem>
-                    </a>
-                </Paper>
+                            <div style={{ float: 'right', width: '70%', right: 0 }}>
+                                <Typography variant="subheading" align='right' component="h3" style={{ float: 'right', width: '100%', right: 0 }}>
+                                    {this.state.data.to}
+                                </Typography>
+                            </div>
+                        </ListItem> : ''}
+                        <Divider />
+                        <a href={this.state.data.state ? 'tel:' + this.state.runner.phonenumber : 'javascript:;'}>
+                            <ListItem button>
+                                {this.state.data.state ? <Avatar alt="Remy Sharp" src={this.state.runner.avatar} style={{ float: 'left', marginRight: 15 }} /> : ''}
+                                <Typography variant="subheading" align='center' component="h3" style={{ marginRight: 10 }} >
+                                    {this.state.data.state ? <Typography component="p" style={{ fontSize: 20 }}>{this.state.runner.name}</Typography> : ''}
+                                    {this.state.data.state ? '' : 'Waiting Runner'}
+                                </Typography>
+                            </ListItem>
+                        </a>
+                    </Paper>
+                    {this.state.data.state ? <a href={'tel:'+this.state.runner.phonenumber}><Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', left: '20%', marginTop: 20 }} onClick={this.handleClickOpen} >
+                        <Call />
+                    </Button></a> : ''}
+                    <Button variant="fab" color="primary" aria-label="add" style={{ background: '#ED8C8C', left: '40%', marginTop: 20 }} onClick={this.handleClickOpen} >
+                        <Close />
+                    </Button>
+                </div>
                 <div id="map" style={{height:'100%',width:'100%'}}>
                     
                 </div>

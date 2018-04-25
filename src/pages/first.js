@@ -44,7 +44,7 @@ class First extends React.Component {
         <div style={{height: 100,width: 100,marginLeft: 'auto',marginRight: 'auto',background: '#2D9CDB',borderRadius: 10}}>
         </div>
         <Typography className={classes.title} color='inherit' align='center'>
-          Hampons Runner
+          The Hampons Runner
         </Typography>
         <div style={{alignSelf: 'space-between'}}>
           <Link to='/login'>
@@ -52,8 +52,8 @@ class First extends React.Component {
             variant='raised'
             color='primary'
             className={classes.button}
-            style={{ background: '#5E94DB' }}>
-            Login
+            style={{ background: '#5E94DB',marginTop:100 }}>
+            Sign Up
           </Button>
           </Link>
           <Link to='/reg'>
@@ -61,8 +61,8 @@ class First extends React.Component {
             color='primary'
             variant='raised'
             className={classes.button}
-            style={{ background: '#5E94DB' }}>
-            Register
+            style={{ color: '#5E94DB',background: '#FFF'}}>
+            Sign In
           </Button>
           </Link>
         </div>

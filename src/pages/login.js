@@ -150,11 +150,11 @@ class Login extends React.Component {
           onChange={this._handlePasswd}
         />
         <Button variant="raised" color="primary" className={classes.button} style={{ background:'#5E94DB'}} onClick={this._handleLogin}>
-          Login
+          Sign In
       </Button>
       <Link to="/reg">
         <Button color="primary" className={classes.button} style={{ color: '#5E94DB' }}>
-          Register
+          Sign Up
       </Button>
       </Link>
       </div>
