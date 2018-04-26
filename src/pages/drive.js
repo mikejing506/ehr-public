@@ -80,18 +80,24 @@ class Driver extends React.Component {
     tick() {
         console.log('tick+1')
         request.post(config.server + '/order/maps').send({ id: this.props.match.params.id }).end((err, res) => {
-            if (err) throw err
-            this.setState({ data: res.body.id[0] })
-            if (res.body.id[0].state == 1) {
-                request.post(config.server + '/order/getrunner').send({ id: res.body.id[0].rid }).end((err, res) => {
-                    if (err) throw err
-                    this.setState({ runner: res.body.id[0] })
-                })
-            } else if (res.body.id[0].state == 2){
-                this.props.history.push('/order')
+            // if (err) throw err
+            console.log(res.body.id.length)
+            if (res.body.id.length > 0) {
+                this.setState({ data: res.body.id[0] })
+                if (res.body.id[0].state == 1) {
+                    request.post(config.server + '/order/getrunner').send({ id: res.body.id[0].rid }).end((err, res) => {
+                        if (err) throw err
+                        this.setState({ runner: res.body.id[0] })
+                    })
+                } else if (res.body.id[0].state == 2) {
+                    this.props.history.push('/order')
+                } else {
+                    console.log('waitting')
+                }
             }else{
-                console.log('waitting')
+                this.props.history.push('/');
             }
+            
         });
     }
 
@@ -156,7 +162,7 @@ class Driver extends React.Component {
                             <ArrowBack />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order Ditail
+                            Order Detail
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -194,12 +200,20 @@ class Driver extends React.Component {
                             </ListItem>
                         </a>
                     </Paper>
-                    {this.state.data.state ? <a href={'tel:'+this.state.runner.phonenumber}><Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', left: '20%', marginTop: 20 }} onClick={this.handleClickOpen} >
-                        <Call />
-                    </Button></a> : ''}
-                    <Button variant="fab" color="primary" aria-label="add" style={{ background: '#ED8C8C', left: '40%', marginTop: 20 }} onClick={this.handleClickOpen} >
-                        <Close />
-                    </Button>
+                    <div style={{
+                        display: "flex",
+                        width:'100%',
+                        flexDirection:'row',
+                        justifyContent:'space-around'
+                    }}>
+                        {this.state.data.state ? <a href={'tel:'+this.state.runner.phonenumber}><Button variant="fab" color="primary" aria-label="add" style={{ background: '#6FCF97', marginTop: 20 }} onClick={this.handleClickOpen} >
+                            <Call />
+                        </Button></a> : ''}
+                        <Button variant="fab" color="primary" aria-label="add" style={{ background: '#ED8C8C', marginTop: 20 }} onClick={this.handleClickOpen} >
+                            <Close />
+                        </Button>
+                    </div>
+                    
                 </div>
                 <div id="map" style={{height:'100%',width:'100%'}}>
                     

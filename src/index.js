@@ -52,8 +52,6 @@ Array.prototype.remove = function (val) {
 
 render((
   <HashRouter>
-    <TransitionGroup>
-      <CSSTransition classNames="fade" timeout={300}>
     <Switch>
       <Route exact path='/' component={f ? Index : First} />
       <Route path='/index' component={Index} />
@@ -76,7 +74,5 @@ render((
       <Route path='/runner_order' component={RunnerOrder} />
       <Route path='/runner_ditail/:id' component={RunnerOrderDitail} />
     </Switch>
-    </CSSTransition>
-    </TransitionGroup>
   </HashRouter>
   ), document.querySelector('#root'))

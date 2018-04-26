@@ -133,7 +133,7 @@ class PreOrderCW extends React.Component {
                             </IconButton>
                         </Link>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order Ditail
+                            Order Detail
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -141,7 +141,7 @@ class PreOrderCW extends React.Component {
                     <Avatar className={classes.continue}>
                     </Avatar>
                     <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
-                        Wash Car
+                        Car Wash
                     </Typography>
                     <Paper elevation={5} style={{marginBottom:20}}>
                         <ListItem button>
@@ -193,7 +193,7 @@ class PreOrderCW extends React.Component {
                         </Typography>
                     </Paper>:''}
                     <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
-                        Okey
+                        Okay
                     </Button>
                 </div>
                 

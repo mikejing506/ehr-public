@@ -133,6 +133,11 @@ class RunnerIndex extends React.Component {
 
     tick() {
         console.log('tick+1')
+        request.post(config.server + '/runner').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+            if (err) throw err
+            this.setState({ data: res.body.id[0] })
+            console.log(res.body.id[0])
+        });
         if (!this.state.data) {
             request.post(config.server + '/runner/new').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
                 if (err) throw err
@@ -215,7 +220,7 @@ class RunnerIndex extends React.Component {
                                 <Avatar className={classes.continue} style={{ backgroundColor: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                 </Avatar>
                                 <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
-                                    On Process Order
+                                   Order in Process
                                 </Typography>
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                                     <strong style={{ fontSize: 16, color: '#000' ,marginRight: 7}}>{this.state.data.name}</strong> {config.order[this.state.data.class]}

@@ -128,7 +128,7 @@ class PreOrderCC extends React.Component {
                             </IconButton>
                         </Link>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order Ditail
+                            Order Detail
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -178,7 +178,7 @@ class PreOrderCC extends React.Component {
                     <Paper elevation={5} style={{ marginBottom: 20 }}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
-                                Child info and note
+                                Tell about your child
                             </Typography>
                             <div style={{ float: 'right', width: '57%', right: 0 }}>
                                 <TextField
@@ -202,7 +202,7 @@ class PreOrderCC extends React.Component {
                         </Typography>
                     </Paper>
                     <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
-                        Okey
+                        Okay
                     </Button>
                 </div>
                 

@@ -223,21 +223,21 @@ class RunnerNew extends React.Component {
                             <Typography
                                 color="inherit"
                                 className={classes.title} >
-                                New order coming!
+                                New order requested!
                             </Typography>
                     </Toolbar>
                 </AppBar>
 
                 <div className={classes.body}>
                     <div id="map" style={{ height: 200, width: '100%' }} >
-                    </div>
+                    </div> 
                     {this.state.data === undefined ? '':(
                             <Paper className={classes.papers} elevation={4}>
                                 <Avatar className={classes.continue} style={{ backgroundColor: this.state.data.state == 0 ? '#2D9CDB' : '#75BA80', }}>
                                 </Avatar>
                                 <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
                                     On Process Order
-                            </Typography>
+                                </Typography>
 
                                 <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
                                     {new Date(parseInt(this.state.data.time)).Format("yyyy.MM.dd - hh:mm")}

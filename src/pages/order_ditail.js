@@ -105,7 +105,7 @@ class OrderDitail extends React.Component {
                             <ArrowBack />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order Ditail
+                            Order Detail
                         </Typography>
                     </Toolbar>
                 </AppBar>

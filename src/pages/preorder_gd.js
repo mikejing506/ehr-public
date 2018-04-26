@@ -121,7 +121,7 @@ class PreOrderGD extends React.Component {
                             </IconButton>
                         </Link>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order Ditail
+                            Order Detail
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -167,7 +167,7 @@ class PreOrderGD extends React.Component {
                         </ListItem>
                         </Paper>
                     <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
-                        Okey
+                        Okay
                     </Button>
                 </div>
                 
