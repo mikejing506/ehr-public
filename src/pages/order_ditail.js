@@ -14,6 +14,13 @@ import Avatar from 'material-ui/Avatar';
 import {
     ArrowBack
 } from 'material-ui-icons';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from 'material-ui/Dialog';
+import Slide from 'material-ui/transitions/Slide';
 
 const request = require('superagent');
 const config = require('../config')
@@ -46,6 +53,11 @@ const styles = theme => ({
         float: 'left',
         marginTop: 2
     },
+    button: {
+        marginTop: 15,
+        width: '100%',
+        borderRadius: '1.5rem',
+    },
     complish: {
         backgroundColor: '#75BA80',
         width: 20,
@@ -55,6 +67,9 @@ const styles = theme => ({
     }
 });
 
+function Transition(props) {
+    return <Slide direction="up" {...props} />;
+}
 
 class OrderDitail extends React.Component {
     state = {
@@ -63,6 +78,13 @@ class OrderDitail extends React.Component {
         data:{},
         f: ['From', 'Address', 'Address', 'Address', 'Address', 'Address', 'From'],
         t: ['To', 'Classification', '', '', '', '', 'Start Time'] 
+    };
+
+    handleCancel = () => {
+        request.post(config.server + '/order/cancel').send({ id: this.props.match.params.id }).end((err, res) => {
+            if (err) throw err
+            this.props.history.push('/order')
+        })
     };
 
     componentWillMount() {
@@ -90,6 +112,14 @@ class OrderDitail extends React.Component {
             })
         })
     }
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         const { classes } = this.props;
@@ -135,7 +165,29 @@ class OrderDitail extends React.Component {
                             {this.state.t[this.state.data.class]}:  {this.state.data.to}
                         </Typography>
                     </Paper>
-                    
+                    <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this.handleClickOpen}>
+                        Delete Order
+                    </Button>
+                    <Dialog
+                        open={this.state.open}
+                        transition={Transition}
+                        keepMounted
+                        onClose={this.handleClose}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle id="alert-dialog-slide-title">
+                            {"Delete this order?"}
+                        </DialogTitle>
+                        <DialogActions>
+                            <Button onClick={this.handleClose} color="primary">
+                                Not
+                        </Button>
+                            <Button onClick={this.handleCancel} color="primary">
+                                OK
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
             </div>
         );

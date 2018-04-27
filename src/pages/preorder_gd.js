@@ -18,6 +18,9 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 
+import positionIcon from "../icons/position.svg";
+import noteIcon from '../icons/note.svg'
+
 const request = require('superagent');
 const config = require('../config')
 
@@ -57,8 +60,14 @@ const styles = theme => ({
     },
     button: {
         marginTop: 30,
-        width: '100%',
+        width: '90%',
+        marginLeft: '5%',
         borderRadius: '1.5rem',
+        marginBottom: 20,
+        position: 'fixed',
+        bottom: 20,
+        left: 0,
+        flexDirection: 'column'
     },
 });
 
@@ -134,9 +143,9 @@ class PreOrderGD extends React.Component {
                     <Paper elevation={5} style={{marginBottom:20}}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{marginRight:10}}>
-                                Deliverty Address
+                                <img src={positionIcon} style={{ marginRight: 5 }} />  Deliverty Address
                             </Typography>
-                            <div style={{ float: 'right',width:'60%', right:0}}>
+                            <div style={{ float: 'right',width:'54%', right:0}}>
                                 <TextField
                                     required
                                     id="required"
@@ -151,9 +160,9 @@ class PreOrderGD extends React.Component {
                         <Paper elevation={5} style={{ marginBottom: 20 }}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                                Request List
+                                <img src={noteIcon} style={{ marginRight: 5 }} /> Request List
                                 </Typography>
-                            <div style={{ float: 'right', width: '70%', right: 0 }}>
+                            <div style={{ float: 'right', width: '65%', right: 0 }}>
                                 <TextField
                                     required
                                     id="required"

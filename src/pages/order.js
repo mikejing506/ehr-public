@@ -23,7 +23,9 @@ const styles = theme => ({
         // textAlign: 'center',
         // paddingTop: theme.spacing.unit * 20,
         flexGrow: 1,
-        height: '100%'
+        height: '100%',
+        overflow: 'scroll',
+        background: '#E5E5E5' 
     },
     appbar: {
         paddingTop: theme.spacing.unit,

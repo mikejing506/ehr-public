@@ -11,6 +11,9 @@ import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
+import Divider from 'material-ui/Divider';
+import Switch from 'material-ui/Switch';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import {
     ArrowBack
 } from 'material-ui-icons';
@@ -23,7 +26,8 @@ const styles = theme => ({
         // textAlign: 'center',
         // paddingTop: theme.spacing.unit * 20,
         flexGrow: 1,
-        height: '100%'
+        height: '100%',
+        background: '#E5E5E5' 
     },
     appbar: {
         paddingTop: theme.spacing.unit,
@@ -96,38 +100,89 @@ class Setting extends React.Component {
                             </IconButton>
                         </Link>
                         <Typography variant="title" color="inherit" className={classes.flex}>
-                            Order
+                            Setting
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <div className={classes.panels}>
-                    {this.state.data.map((v, i) => (
-                        <Link to={"/order_ditail/" + v.id}>
-                            <Paper className={classes.papers} elevation={4}>
-                                <div style={{ float: 'right', marginTop: 11, }}>
-                                    <Typography component="h3" style={{ fontSize: 22, color: '#2D9CDB' }}>
-                                        {v.state == 0 ? "Ditail" : v.cast}
-                                    </Typography>
-                                    <Typography component="h3" align='right' style={{ fontSize: 12, color: '#2D9CDB', }}>
-                                        {v.state == 0 ? "Process" : "Finished"}
-                                    </Typography>
-                                </div>
-                                <Avatar className={classes.continue}>
-                                </Avatar>
-                                <Typography variant="headline" component="h3" style={{ marginLeft: 25, marginBottom: 10, fontSize: 20 }}>
-                                    Driver Picking
-                        </Typography>
-
-                                <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                                    {Date(v.time).toString("YYYY-MM-DD")}
-                                </Typography>
-                                <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                                    {v.to}
-                                </Typography>
-
-                            </Paper>
-                        </Link >
-                    ))}
+                    <Typography component="p" style={{ fontSize: 16, color: '#333', marginLeft: 7,marginBottom:10,marginTop:10 }}>
+                        Notice
+                    </Typography>
+                    <Paper className={classes.papers} elevation={4}>
+                        <ListItem
+                            style={{
+                                display: "flex",
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                Notice
+                            </Typography>
+                            <Switch defaultChecked value="checkedF" color="default"/>
+                        </ListItem>
+                        <Divider />
+                        <ListItem
+                            style={{
+                                display: "flex",
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                Ring
+                            </Typography>
+                            <Switch defaultChecked value="checkedF" color="default" />
+                        </ListItem>
+                        <Divider />
+                        <ListItem
+                            style={{
+                                display: "flex",
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                E-Mail
+                            </Typography>
+                            <Switch defaultChecked value="checkedF" color="default" />
+                        </ListItem>
+                    </Paper>
+                    <Typography component="p" style={{ fontSize: 16, color: '#333', marginLeft: 7, marginBottom: 10, marginTop: 10 }}>
+                        Privacy
+                    </Typography>
+                    <Paper className={classes.papers} elevation={4}>
+                        <ListItem
+                            style={{
+                                display: "flex",
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                Show my name to runner
+                            </Typography>
+                            <Switch defaultChecked value="checkedF" color="default" />
+                        </ListItem>
+                        <Divider />
+                        <ListItem
+                            style={{
+                                display: "flex",
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
+                                Position Services
+                            </Typography>
+                            <Switch defaultChecked value="checkedF" color="default" />
+                        </ListItem>
+                    </Paper>
                 </div>
 
             </div>

@@ -116,7 +116,7 @@ class AccInfo extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <div className={classes.panels}>
-                    <Link to={''}>
+                    <Link to='/changeinfo'>
                         <Paper className={classes.papers} elevation={4}>
                             <Typography variant="headline" component="h3" style={{ marginBottom: 10, fontSize: 20 }}>
                                 Personal Info
@@ -140,19 +140,19 @@ class AccInfo extends React.Component {
 
                         </Paper>
                     </Link >
-                    <Link to={''}>
+                    <Link to='/changepwd'>
                         <Paper className={classes.papers} elevation={4}>
                             <Typography variant="headline" component="h3" style={{ marginBottom: 10, fontSize: 20 }}>
                                 Account Security
                         </Typography>
 
                             <Typography component="p" style={{ fontSize: 12, color: '#888888', marginLeft: 7 }}>
-                                {JSON.parse(localStorage.getItem('userdata')).name + '   ' + JSON.parse(localStorage.getItem('userdata')).phonenumber}
+                                {JSON.parse(localStorage.getItem('userdata')).email}
                             </Typography>
 
                         </Paper>
                     </Link >
-                    <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogout}>
+                    <Button variant="raised" color="primary" className={classes.button} style={{ background: '#ED8C8C' }} onClick={this._handleLogout}>
                         Logout
                     </Button>
                 </div>

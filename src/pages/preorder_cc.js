@@ -18,6 +18,9 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 
+import positionIcon from "../icons/position.svg";
+import noteIcon from '../icons/note.svg' 
+
 const request = require('superagent');
 const config = require('../config')
 
@@ -56,9 +59,15 @@ const styles = theme => ({
         marginTop: 2
     },
     button: {
-        marginTop: 15,
-        width: '100%',
+        marginTop: 30,
+        width: '90%',
+        marginLeft: '5%',
         borderRadius: '1.5rem',
+        marginBottom: 20,
+        position: 'fixed',
+        bottom: 20,
+        left: 0,
+        flexDirection: 'column'
     },
 });
 
@@ -141,9 +150,9 @@ class PreOrderCC extends React.Component {
                     <Paper elevation={5} style={{marginBottom:20}}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{marginRight:10}}>
-                                Address
+                                <img src={positionIcon} style={{ marginRight: 5 }} /> Address
                             </Typography>
-                            <div style={{ float: 'right',width:'100%', right:0}}>
+                            <div style={{ float: 'right',width:'73%', right:0}}>
                                 <TextField
                                     required
                                     id="required"
@@ -160,7 +169,7 @@ class PreOrderCC extends React.Component {
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
                                 Children Number
                             </Typography>
-                            <div style={{ float: 'right', width: '50%', right: 0 }}>
+                            <div style={{ float: 'right', width: '61%', right: 0 }}>
                                 <TextField
                                     id="number"
                                     required
@@ -178,9 +187,9 @@ class PreOrderCC extends React.Component {
                     <Paper elevation={5} style={{ marginBottom: 20 }}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
-                                Tell about your child
+                                <img src={noteIcon} style={{ marginRight: 5 }} /> Tell about your child
                             </Typography>
-                            <div style={{ float: 'right', width: '57%', right: 0 }}>
+                            <div style={{ float: 'right', width: '49%', right: 0 }}>
                                 <TextField
                                     required
                                     id="required"

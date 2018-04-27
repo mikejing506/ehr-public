@@ -16,6 +16,12 @@ const config = require('../config')
 import fs from 'fs';
 
 import img1 from '../imgs/1.png'
+import orderIcon from '../icons/order.svg'
+import accountIcon from '../icons/account.svg'
+import runnerIcon from '../icons/run.svg'
+import aboutIcon from '../icons/about.svg'
+import settingIcon from '../icons/setting.svg'
+import { ListItemIcon } from 'material-ui';
 
 const styles = theme => ({
   root: {
@@ -140,19 +146,33 @@ class Index extends React.Component {
         </Typography>
         <List component="nav" className={classes.sidelist}>
           <Link to="/order"><ListItem button >
-            <ListItemText primary="Order" align='center'/>
+            <ListItemIcon>
+              <img src={orderIcon} style={{ marginLeft: 50 }}/>
+            </ListItemIcon><ListItemText primary="Order" align='left' style={{}}/>
           </ListItem></Link>
           <Link to="/accinfo"><ListItem button >
-            <ListItemText primary="Account" align='center'/>
+            <ListItemIcon>
+              <img src={accountIcon} style={{ marginLeft: 50 }}/>
+            </ListItemIcon>
+            <ListItemText primary="Account" align='left'/>
           </ListItem></Link>
-          <ListItem button >
-            <ListItemText primary="Setting" align='center'/>
-          </ListItem>
+          <Link to="/setting"><ListItem button >
+            <ListItemIcon>
+              <img src={settingIcon} style={{ marginLeft: 50 }}/>
+            </ListItemIcon>
+            <ListItemText primary="Setting" align='left'/>
+          </ListItem></Link>
           {this.state.runner ? <Link to='/runner'><ListItem button >
-            <ListItemText primary="Runner" align='center' />
+            <ListItemIcon>
+              <img src={runnerIcon} style={{ marginLeft: 50 }}/>
+            </ListItemIcon>
+            <ListItemText primary="Runner" align='left' />
           </ListItem></Link> : ''}
           <Link to="/about"><ListItem button >
-            <ListItemText primary="About" align='center'/>
+            <ListItemIcon>
+              <img src={aboutIcon} style={{ marginLeft: 50 }}/>
+            </ListItemIcon>
+            <ListItemText primary="About" align='left'/>
           </ListItem></Link>
         </List>
       </div>

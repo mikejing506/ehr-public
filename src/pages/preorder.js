@@ -18,6 +18,10 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 
+import positionIcon from "../icons/position.svg";
+import pasIcon from "../icons/pass.svg";
+import timeIcon from "../icons/time.svg";
+
 const request = require('superagent');
 const config = require('../config')
 
@@ -56,9 +60,15 @@ const styles = theme => ({
         marginTop: 2
     },
     button: {
-        marginTop: 10,
-        width: '100%',
+        marginTop: 30,
+        width: '90%',
+        marginLeft: '5%',
         borderRadius: '1.5rem',
+        marginBottom: 20, 
+        position: 'fixed', 
+        bottom: 20, 
+        left: 0,
+        flexDirection: 'column'
     },
 });
 
@@ -142,9 +152,9 @@ class PreOrder extends React.Component {
                     <Paper elevation={5} style={{marginBottom:20}}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{marginRight:10}}>
-                                From
+                                <img src={positionIcon} style={{marginRight:5}}/>   From
                             </Typography>
-                            <div style={{ float: 'right',width:'100%', right:0}}>
+                            <div style={{ float: 'right',width:'79%', right:0}}>
                                 <TextField
                                     required
                                     id="required"
@@ -157,10 +167,13 @@ class PreOrder extends React.Component {
                         </ListItem>
                         <Divider />
                         <ListItem button>
+                            {this.props.match.params.id === 'dh' ? 
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                                {this.props.match.params.id === 'dh'? "Start Time":"To"}
-                            </Typography>
-                            <div style={{ float: 'right', width: this.props.match.params.id === 'dh' ? "72%" : "100%", right: 0 }}>
+                                    <img src={timeIcon} style={{ marginRight: 5 }}/> Start Time
+                            </Typography> : <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
+                                    <img src={positionIcon} style={{ marginRight: 5 }}/> To
+                            </Typography>}
+                            <div style={{ float: 'right', width: this.props.match.params.id === 'dh' ? "68%" : "85%", right: 0 }}>
                                 <TextField
                                     required
                                     id="required"
@@ -177,7 +190,7 @@ class PreOrder extends React.Component {
                     <Paper elevation={5} style={{ marginBottom: 20 }}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
-                                Passenger Number
+                                <img src={pasIcon} style={{ marginRight: 5 }} /> Passenger Number
                             </Typography>
                             <div style={{ float: 'right', width: '50%', right: 0 }}>
                                 <TextField
@@ -202,7 +215,7 @@ class PreOrder extends React.Component {
                             Estimated price
                         </Typography>
                     </Paper>
-                    <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB' }} onClick={this._handleLogin}>
+                    <Button variant="raised" color="primary" className={classes.button} style={{ background: '#5E94DB', marginBottom: 20, position: 'fixed', bottom: 20, left: 0 }} onClick={this._handleLogin}>
                         Okay
                     </Button>
                 </div>

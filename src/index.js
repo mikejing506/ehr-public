@@ -16,12 +16,16 @@ import PreOrderCC from './pages/preorder_cc'
 import PreOrderCUS from './pages/preorder_cus'
 import First from './pages/first'
 import AccInfo from './pages/ainfo'
+import ChangeInfo from './pages/changeinfo'
+import ChangePwd from './pages/changepwd'
 import About from './pages/about'
+import Setting from './pages/setting';
 import RunnerIndex from './pages/runner_main'
 import RunnerNew from './pages/runner_new'
 import RunnerOrder from './pages/runner_order'
 import RunnerOrderDitail from './pages/runner_ditail'
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import changeinfo from './pages/changeinfo'
 
 var f = localStorage.getItem('f')
 
@@ -68,6 +72,9 @@ render((
       <Route path='/preorder_cus' component={PreOrderCUS} />
       <Route path='/order_ditail/:id' component={OrderDitail} />
       <Route path='/accinfo' component={AccInfo} />
+      <Route path='/changeinfo' component={ChangeInfo} />
+      <Route path='/changepwd' component={ChangePwd} />
+      <Route path='/setting' component={Setting} />
       <Route path='/about' component={About} />
       <Route path='/runner' component={RunnerIndex} />
       <Route path='/runner_new/:id' component={RunnerNew} />

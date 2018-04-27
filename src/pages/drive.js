@@ -183,7 +183,7 @@ class Driver extends React.Component {
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }} >
                                 {this.state.t[this.state.data.class]}
                             </Typography>
-                            <div style={{ float: 'right', width: '70%', right: 0 }}>
+                            <div style={{ float: 'right', width: this.state.data.class === 6 ? '75%':'100%', right: 0 }}>
                                 <Typography variant="subheading" align='right' component="h3" style={{ float: 'right', width: '100%', right: 0 }}>
                                     {this.state.data.to}
                                 </Typography>
@@ -215,7 +215,7 @@ class Driver extends React.Component {
                     </div>
                     
                 </div>
-                <div id="map" style={{height:'100%',width:'100%'}}>
+                <div id="map" style={{height:'100%',width:'100%',position:'absolute'}}>
                     
                 </div>
                 <Dialog
