@@ -27,7 +27,7 @@ import RunnerOrderDitail from './pages/runner_ditail'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import changeinfo from './pages/changeinfo'
 
-var f = localStorage.getItem('f')
+
 
 Date.prototype.Format = function (fmt) { // author: meizz 
   var o = {
@@ -57,8 +57,8 @@ Array.prototype.remove = function (val) {
 render((
   <HashRouter>
     <Switch>
-      <Route exact path='/' component={f ? Index : First} />
-      <Route path='/index' component={Index} />
+      <Route exact path='/' component={Index} />
+      <Route path='/first' component={First} />
       <Route path='/login' component={Login} />
       <Route path='/reg' component={Reg} />
       <Route path='/reg_stp2' component={Reg_stp2} />

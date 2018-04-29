@@ -91,8 +91,8 @@ class AccInfo extends React.Component {
 
     _handleLogout = () =>{
         localStorage.removeItem("f")
-        localStorage.removeItem('userdata')
-        this.props.history.push('/')
+        // localStorage.removeItem('userdata')
+        window.location.href = "/"
     }
 
     render() {

@@ -143,7 +143,7 @@ class PreOrderFD extends React.Component {
                     <Paper elevation={5} style={{ marginBottom: 20 }}>
                         <ListItem button>
                             <Typography variant="subheading" component="h3" style={{ marginRight: 10 }}>
-                                <img src={positionIcon} style={{ marginRight: 5 }} />  Deliverty Address
+                                <img src={positionIcon} style={{ marginRight: 5 }} />  Delivery  Address
                             </Typography>
                             <div style={{ float: 'right', width: '54%', right: 0 }}>
                                 <TextField

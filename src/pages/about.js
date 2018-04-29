@@ -80,7 +80,7 @@ class About extends React.Component {
                     <div style={{ height: 100, width: 100, marginLeft: 'auto', marginRight: 'auto', background: '#2D9CDB', borderRadius: 10, marginTop:20,marginBottom:20 }}>
                     </div>
                     <Typography color='inherit' align='center' style={{fontSize:18}}>
-                         The Hampons Runner
+                         The Hampton Runner
                     </Typography>
                     <Typography component="p" align='center' style={{ fontSize: 12, color: '#888888',marginTop:10,marginBottom:20 }}>
                         Version 0.0.1 Alpha
@@ -88,7 +88,7 @@ class About extends React.Component {
                     </Paper>
                     <Paper className={classes.papers} elevation={4}>
                         <Typography variant="subheading" align="center" color="inherit">
-                            Email: HamponsRunner@gmail.com
+                            Email: HamptonRunner@gmail.com
                         </Typography>
                     </Paper>
                     <Paper className={classes.papers} elevation={4}>
@@ -97,7 +97,7 @@ class About extends React.Component {
                         </Typography>
                     </Paper>
                     <Typography component="p" align='center' style={{ fontSize: 12, color: '#888888',marginTop:10,marginBottom:20 }}>
-                        ©2017-2018 HamponsRunner co.Ltd All rights reserved
+                        ©2017-2018 HamptonRunner co.Ltd All rights reserved
                     </Typography>
                 </div>
 

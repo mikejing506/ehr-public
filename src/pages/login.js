@@ -103,7 +103,7 @@ class Login extends React.Component {
           console.log(res);
           localStorage.setItem('f',true);
           localStorage.setItem('userdata', JSON.stringify(res.body[0]))
-          this.props.history.push('/index')
+          window.location.href="/"
         }
       })
     }

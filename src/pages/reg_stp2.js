@@ -21,7 +21,8 @@ const styles = theme => ({
         // textAlign: 'center',
         // paddingTop: theme.spacing.unit * 20,
         flexGrow: 1,
-        height: '100%'
+        height: '100%',
+        background: '#E5E5E5'
     },
     appbar: {
         paddingTop: theme.spacing.unit,
@@ -124,7 +125,7 @@ class Reg extends React.Component {
                 console.log(res);
                 if (res.body[0].ID) {
                     localStorage.setItem('f', true);
-                    this.props.history.push('/index')
+                    window.location.href = "/"
                     localStorage.setItem('userdata', JSON.stringify(res.body[0]))
                 }
                 // localStorage.setItem('f', true);

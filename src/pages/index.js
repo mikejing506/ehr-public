@@ -23,12 +23,15 @@ import aboutIcon from '../icons/about.svg'
 import settingIcon from '../icons/setting.svg'
 import { ListItemIcon } from 'material-ui';
 
+var f = localStorage.getItem('f')
+
 const styles = theme => ({
   root: {
     // textAlign: 'center',
     // paddingTop: theme.spacing.unit * 20,
     flexGrow: 1,
-    height:'100%'
+    height: '100%',
+    background: '#E5E5E5'
   },
   appbar:{
     paddingTop: theme.spacing.unit * 2,
@@ -100,16 +103,21 @@ class Index extends React.Component {
   };
 
   componentWillMount() {
-    this.setState({
-      user: JSON.parse(localStorage.getItem('userdata'))
-    })
-    request.post(config.server + '/users/update').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
-      if (err) throw err;
-      // console.log(res)
+    if (!f) {
+      this.props.history.push('/first')
+    }else{
       this.setState({
-        runner:res.body.id[0].runner
+        user: JSON.parse(localStorage.getItem('userdata'))
       })
-    })
+      request.post(config.server + '/users/update').send({ id: JSON.parse(localStorage.getItem('userdata')).ID }).end((err, res) => {
+        if (err) throw err;
+        // console.log(res)
+        this.setState({
+          runner: res.body.id[0].runner
+        })
+      })
+    }
+    
   }
 
   handleClose = () => {
@@ -225,12 +233,12 @@ class Index extends React.Component {
           <Typography variant="subheading" gutterBottom>
               Delivery Services
           </Typography>
-            <Link to='/preorder_gd'><div className={classes.items}>
+          <Link to='/preorder_gd'><div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
                 <strong>Grocery </strong>  Delivery
             </Typography>
             </div></Link>
-          <Link to='/preorder_fd'><div className={classes.items}>
+          <Link to='/preorder_fd'><div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
               <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
                 <strong>Food</strong> Delivery
             </Typography>
@@ -238,12 +246,12 @@ class Index extends React.Component {
           <Typography variant="subheading" gutterBottom>
             Another Services
           </Typography>
-          <Link to='/preorder_cc'><div className={classes.items}>
+          <Link to='/preorder_cc'><div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
             <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
               <strong>Child </strong>  Care
             </Typography>
           </div></Link>
-            <Link to='/preorder_cus'><div className={classes.items}>
+          <Link to='/preorder_cus'><div className={classes.items} style={{ background: `url(${img1})`, backgroundSize: 'cover' }}>
             <Typography className={classes.items_text} align='right' color="inherit" gutterBottom>
               <strong>Custom</strong>
             </Typography>
